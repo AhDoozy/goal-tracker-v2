@@ -68,28 +68,28 @@ public final class GoalTrackerPanel extends PluginPanel implements Refreshable
         title.setForeground(Color.WHITE);
         title.setFont(FontManager.getRunescapeBoldFont());
 
-        JLabel author = new JLabel("");
-        author.setForeground(Color.LIGHT_GRAY);
-        author.setFont(title.getFont().deriveFont(title.getFont().getSize2D() - 3f));
+        // Title row (top)
+        JPanel titleRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        titleRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        titleRow.add(title);
 
-        JPanel titleTextPanel = new JPanel(new GridLayout(2, 1));
-        titleTextPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
-        titleTextPanel.add(title);
-        titleTextPanel.add(author);
-        titlePanel.add(titleTextPanel, BorderLayout.WEST);
-
-        JPanel addGoalPanel = new JPanel();
-        addGoalPanel.setLayout(new BoxLayout(addGoalPanel, BoxLayout.Y_AXIS));
-        addGoalPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
-        JPanel addGoalRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
-        addGoalRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        // Buttons row (bottom)
+        JPanel buttonsRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
+        buttonsRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
         ActionBarButton addGoalBtn = new ActionBarButton("+ Add goal", this::addNewGoal);
-        addGoalRow.add(addGoalBtn);
-        addGoalPanel.add(addGoalRow);
-        addGoalPanel.add(Box.createVerticalStrut(4));
         ActionBarButton addFromPresetBtn = new ActionBarButton("Add from Preset…", this::addFromPreset);
-        addGoalPanel.add(addFromPresetBtn);
-        titlePanel.add(addGoalPanel, BorderLayout.EAST);
+        buttonsRow.add(addGoalBtn);
+        buttonsRow.add(addFromPresetBtn);
+
+        // Stack rows vertically
+        JPanel headerTop = new JPanel();
+        headerTop.setLayout(new BoxLayout(headerTop, BoxLayout.Y_AXIS));
+        headerTop.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        headerTop.add(titleRow);
+        headerTop.add(Box.createVerticalStrut(4));
+        headerTop.add(buttonsRow);
+
+        titlePanel.add(headerTop, BorderLayout.CENTER);
 
         // Action bar
         ActionBar actionBar = new ActionBar();
