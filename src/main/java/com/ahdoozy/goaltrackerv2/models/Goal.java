@@ -1,9 +1,9 @@
-package com.example.models;
+package com.ahdoozy.goaltrackerv2.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

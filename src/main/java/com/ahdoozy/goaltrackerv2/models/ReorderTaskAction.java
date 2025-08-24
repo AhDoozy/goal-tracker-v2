@@ -1,6 +1,6 @@
-package com.example.models;
+package com.ahdoozy.goaltrackerv2.models;
 
-import com.toofifty.goaltracker.models.task.Task;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 
-package com.example.utils;
+package com.ahdoozy.goaltrackerv2.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

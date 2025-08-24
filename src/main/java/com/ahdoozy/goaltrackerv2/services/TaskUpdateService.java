@@ -1,7 +1,10 @@
-package com.example.services;
+package com.ahdoozy.goaltrackerv2.services;
 
-import com.example.ItemCache;
-import com.toofifty.goaltracker.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.ItemCache;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.StatChanged;

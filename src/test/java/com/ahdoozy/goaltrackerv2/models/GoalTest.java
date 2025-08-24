@@ -1,9 +1,9 @@
 package com.ahdoozy.goaltrackerv2.models;
 
-import com.toofifty.goaltracker.utils.ReorderableList;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.task.ItemTask;
-import com.toofifty.goaltracker.models.task.ManualTask;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.task.ItemTask;
+import com.ahdoozy.goaltrackerv2.models.task.ManualTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

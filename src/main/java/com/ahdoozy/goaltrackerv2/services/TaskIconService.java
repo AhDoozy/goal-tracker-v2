@@ -1,6 +1,7 @@
-package com.example.services;
+package com.ahdoozy.goaltrackerv2.services;
 
-import com.example.GoalTrackerPlugin;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import net.runelite.api.Client;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.SkillIconManager;
@@ -29,19 +30,19 @@ public final class TaskIconService
     static
     {
         CROSS_MARK_ICON = new ImageIcon(
-            ImageUtil.loadImageResource(GoalTrackerPlugin.class, "/cross_mark.png")
+            ImageUtil.loadImageResource(GoalTrackerV2Plugin.class, "/cross_mark.png")
         );
         CHECK_MARK_ICON = new ImageIcon(
-            ImageUtil.loadImageResource(GoalTrackerPlugin.class, "/check_mark.png")
+            ImageUtil.loadImageResource(GoalTrackerV2Plugin.class, "/check_mark.png")
         );
         QUEST_ICON = new ImageIcon(
-            ImageUtil.loadImageResource(GoalTrackerPlugin.class, "/quest_icon.png")
+            ImageUtil.loadImageResource(GoalTrackerV2Plugin.class, "/quest_icon.png")
         );
         QUEST_COMPLETE_ICON = new ImageIcon(
-            ImageUtil.loadImageResource(GoalTrackerPlugin.class, "/quest_complete.png")
+            ImageUtil.loadImageResource(GoalTrackerV2Plugin.class, "/quest_complete.png")
         );
         UNKNOWN_ICON = new ImageIcon(
-            ImageUtil.loadImageResource(GoalTrackerPlugin.class, "/question_mark.png")
+            ImageUtil.loadImageResource(GoalTrackerV2Plugin.class, "/question_mark.png")
         );
     }
 

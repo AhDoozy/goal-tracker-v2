@@ -1,6 +1,6 @@
 package com.ahdoozy.goaltrackerv2.models.task;
 
-import com.toofifty.goaltracker.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

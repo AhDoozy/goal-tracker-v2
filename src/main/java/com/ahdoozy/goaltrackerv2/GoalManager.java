@@ -1,10 +1,10 @@
-package com.example;
+package com.ahdoozy.goaltrackerv2;
 
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.enums.TaskType;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public final class GoalManager
 {
     @Inject
-    private GoalTrackerConfig config;
+    private GoalTrackerV2Config config;
 
     @Inject
     private GoalSerializer goalSerializer;

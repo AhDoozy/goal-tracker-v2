@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
 public interface Refreshable
 {

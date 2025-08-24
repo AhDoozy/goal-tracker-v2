@@ -1,4 +1,4 @@
-package com.example;
+package com.ahdoozy.goaltrackerv2;
 
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigGroup;
@@ -11,7 +11,7 @@ import java.awt.Color;
  * Stores serialized goals, item cache data, and completion message color.
  */
 @ConfigGroup("goaltracker")
-public interface GoalTrackerConfig extends Config
+public interface GoalTrackerV2Config extends Config
 {
     @ConfigItem(keyName = "goalTrackerData", name = "", description = "", hidden = true)
     default String goalTrackerData()

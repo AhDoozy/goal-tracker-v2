@@ -1,7 +1,10 @@
-package com.example.adapters;
+package com.ahdoozy.goaltrackerv2.adapters;
 
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import com.google.gson.*;
-import com.toofifty.goaltracker.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Type;

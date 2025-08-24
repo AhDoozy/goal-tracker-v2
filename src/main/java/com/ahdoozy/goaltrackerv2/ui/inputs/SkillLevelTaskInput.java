@@ -1,10 +1,10 @@
-package com.example.ui.inputs;
+package com.ahdoozy.goaltrackerv2.ui.inputs;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.SkillLevelTask;
-import com.example.ui.SimpleDocumentListener;
-import com.example.ui.components.ComboBox;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.SkillLevelTask;
+import com.ahdoozy.goaltrackerv2.ui.SimpleDocumentListener;
+import com.ahdoozy.goaltrackerv2.ui.components.ComboBox;
 import net.runelite.api.Skill;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.components.FlatTextField;
@@ -27,7 +27,7 @@ public final class SkillLevelTaskInput extends TaskInput
 
     private Pattern numberPattern = Pattern.compile("^(?:\\d{1,2})?$");
 
-    public SkillLevelTaskInput(GoalTrackerPlugin plugin, Goal goal)
+    public SkillLevelTaskInput(GoalTrackerV2Plugin plugin, Goal goal)
     {
         super(plugin, goal, "Skill level");
 

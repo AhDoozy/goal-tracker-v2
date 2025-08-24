@@ -1,4 +1,4 @@
-package com.example.adapters;
+package com.ahdoozy.goaltrackerv2.adapters;
 
 import com.google.gson.*;
 import net.runelite.api.Quest;

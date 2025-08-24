@@ -1,6 +1,6 @@
-package com.example.models.task;
+package com.ahdoozy.goaltrackerv2.models.task;
 
-import com.example.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +36,12 @@ public final class ItemTask extends Task
         }
 
         return String.format("%d x %s", quantity, itemName);
+    }
+
+    @Override
+    public String getDisplayName()
+    {
+        return itemName;
     }
 
     @Override

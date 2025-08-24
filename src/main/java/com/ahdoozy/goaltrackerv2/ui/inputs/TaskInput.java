@@ -1,10 +1,10 @@
 
-package com.example.ui.inputs;
+package com.ahdoozy.goaltrackerv2.ui.inputs;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.Task;
-import com.example.ui.components.TextButton;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.ui.components.TextButton;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,14 +24,14 @@ import java.util.Collection;
 public abstract class TaskInput extends JPanel
 {
     protected final int PREFERRED_INPUT_HEIGHT = 16;
-    protected final GoalTrackerPlugin plugin;
+    protected final GoalTrackerV2Plugin plugin;
     private final Goal goal;
     @Getter
     private final JPanel inputRow;
     @Getter
     private Consumer<Task> listener;
 
-    TaskInput(GoalTrackerPlugin plugin, Goal goal, String title)
+    TaskInput(GoalTrackerV2Plugin plugin, Goal goal, String title)
     {
         super(new GridBagLayout());
         this.plugin = plugin;
