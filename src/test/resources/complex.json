@@ -1,0 +1,48 @@
+[
+  {
+    "description": "My Goal",
+    "display_order": -1,
+    "items": [
+      {
+        "description": "Do all the things!",
+        "previous_result": "completed",
+        "has_been_notified": true,
+        "indent_level": 0,
+        "type": "manual"
+      },
+      {
+        "skill": "Attack",
+        "level": 99,
+        "previous_result": "in_progress",
+        "has_been_notified": false,
+        "indent_level": 1,
+        "type": "skill_level"
+      },
+      {
+        "skill": "Attack",
+        "xp": 1234,
+        "previous_result": "not_started",
+        "has_been_notified": false,
+        "indent_level": 2,
+        "type": "skill_xp"
+      },
+      {
+        "quest_id": 0,
+        "previous_result": "not_started",
+        "has_been_notified": false,
+        "indent_level": 1,
+        "type": "quest"
+      },
+      {
+        "quantity": 10,
+        "acquired": 4,
+        "item_id": 314,
+        "item_name": "Feather",
+        "previous_result": "not_started",
+        "has_been_notified": false,
+        "indent_level": 0,
+        "type": "item"
+      }
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+package com.example.models.task;
+
+import com.example.models.enums.Status;
+import com.example.models.enums.TaskType;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Setter
+@Getter
+@SuperBuilder
+/**
+ * Task representing a manually tracked entry (checklist-style).
+ * Toggled complete/incomplete by the user.
+ */
+public final class ManualTask extends Task
+{
+    private String description;
+
+    public void toggle()
+    {
+        this.setStatus(this.getStatus().isNotStarted() ? Status.COMPLETED : Status.NOT_STARTED);
+    }
+
+    @Override
+    public String toString()
+    {
+        return description;
+    }
+
+    @Override
+    public TaskType getType()
+    {
+        return TaskType.MANUAL;
+    }
+}

@@ -1,0 +1,43 @@
+package com.example.models.enums;
+
+import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+/**
+ * Enumeration of supported task types for goals.
+ * Used in JSON serialization and deserialization (manual, skill, quest, item).
+ */
+public enum TaskType
+{
+    @SerializedName("manual")
+    MANUAL("manual"),
+    @SerializedName("skill_level")
+    SKILL_LEVEL("skill_level"),
+    @SerializedName("skill_xp")
+    SKILL_XP("skill_xp"),
+    @SerializedName("quest")
+    QUEST("quest"),
+    @SerializedName("item")
+    ITEM("item");
+
+    private final String name;
+
+    public static TaskType fromString(String name)
+    {
+        for (TaskType type : TaskType.values()) {
+            if (type.toString().equals(name)) {
+                return type;
+            }
+        }
+        throw new IllegalStateException("Invalid task type " + name);
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.name;
+    }
+}
