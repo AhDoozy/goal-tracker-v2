@@ -40,6 +40,7 @@ public class GoalPresetRepository {
         list.add(buildFullVoidArmor());
         list.add(buildFastTravelUnlocks());
         list.add(buildFreeToPlayQuests());
+        list.add(buildAllBarrowsGear());
         return list;
     }
 
@@ -231,5 +232,38 @@ public class GoalPresetRepository {
                 "Quests that unlock major transportation methods: spirit trees, gliders, fairy rings, balloons, city teleports, carts, memoirs, seed pod, and more.",
                 Arrays.asList(travel)
         );
+    }
+
+    private static Preset buildAllBarrowsGear() {
+        Goal barrows = Goal.builder()
+                .description("All Barrows Gear")
+                .tasks(ReorderableList.from(
+                        ItemTask.builder().itemId(AHRIMS_HOOD).itemName("Ahrim's hood").quantity(1).build(),
+                        ItemTask.builder().itemId(AHRIMS_ROBETOP).itemName("Ahrim's robetop").quantity(1).build(),
+                        ItemTask.builder().itemId(AHRIMS_ROBESKIRT).itemName("Ahrim's robeskirt").quantity(1).build(),
+                        ItemTask.builder().itemId(AHRIMS_STAFF).itemName("Ahrim's staff").quantity(1).build(),
+                        ItemTask.builder().itemId(DHAROKS_HELM).itemName("Dharok's helm").quantity(1).build(),
+                        ItemTask.builder().itemId(DHAROKS_PLATEBODY).itemName("Dharok's platebody").quantity(1).build(),
+                        ItemTask.builder().itemId(DHAROKS_PLATELEGS).itemName("Dharok's platelegs").quantity(1).build(),
+                        ItemTask.builder().itemId(DHAROKS_GREATAXE).itemName("Dharok's greataxe").quantity(1).build(),
+                        ItemTask.builder().itemId(GUTHANS_HELM).itemName("Guthan's helm").quantity(1).build(),
+                        ItemTask.builder().itemId(GUTHANS_PLATEBODY).itemName("Guthan's platebody").quantity(1).build(),
+                        ItemTask.builder().itemId(GUTHANS_CHAINSKIRT).itemName("Guthan's chainskirt").quantity(1).build(),
+                        ItemTask.builder().itemId(GUTHANS_WARSPEAR).itemName("Guthan's warspear").quantity(1).build(),
+                        ItemTask.builder().itemId(KARILS_COIF).itemName("Karil's coif").quantity(1).build(),
+                        ItemTask.builder().itemId(KARILS_LEATHERTOP).itemName("Karil's leathertop").quantity(1).build(),
+                        ItemTask.builder().itemId(KARILS_LEATHERSKIRT).itemName("Karil's leatherskirt").quantity(1).build(),
+                        ItemTask.builder().itemId(KARILS_CROSSBOW).itemName("Karil's crossbow").quantity(1).build(),
+                        ItemTask.builder().itemId(TORAGS_HELM).itemName("Torag's helm").quantity(1).build(),
+                        ItemTask.builder().itemId(TORAGS_PLATEBODY).itemName("Torag's platebody").quantity(1).build(),
+                        ItemTask.builder().itemId(TORAGS_PLATELEGS).itemName("Torag's platelegs").quantity(1).build(),
+                        ItemTask.builder().itemId(TORAGS_HAMMERS).itemName("Torag's hammers").quantity(1).build(),
+                        ItemTask.builder().itemId(VERACS_HELM).itemName("Verac's helm").quantity(1).build(),
+                        ItemTask.builder().itemId(VERACS_BRASSARD).itemName("Verac's brassard").quantity(1).build(),
+                        ItemTask.builder().itemId(VERACS_PLATESKIRT).itemName("Verac's plateskirt").quantity(1).build(),
+                        ItemTask.builder().itemId(VERACS_FLAIL).itemName("Verac's flail").quantity(1).build()
+                ))
+                .build();
+        return new Preset("All Barrows Gear", "Collect a full set of each Barrows brothers' equipment.", Arrays.asList(barrows));
     }
 }

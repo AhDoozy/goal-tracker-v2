@@ -299,6 +299,180 @@ public final class GoalTrackerV2Plugin extends Plugin
         schedulePanelRefresh(750);
     }
 
+    @Subscribe
+    public void onItemContainerChanged(ItemContainerChanged event)
+    {
+        // Only react to the player's inventory/equipment/bank-like containers
+        if (!isPlayerInventoryContainer(event.getContainerId()))
+        {
+            return;
+        }
+
+        List<ItemTask> itemTasks = goalManager.getIncompleteTasksByType(TaskType.ITEM);
+        for (ItemTask task : itemTasks)
+        {
+            final int itemId = task.getItemId();
+            if (itemId <= 0)
+            {
+                continue;
+            }
+
+            final int count = countHeldEquivalent(itemId, task.getItemName());
+            final boolean changed = task.recomputeFromCount(count);
+            if (!changed)
+            {
+                continue;
+            }
+
+            uiStatusManager.refresh(task);
+            if (task.getStatus().isCompleted())
+            {
+                notifyTask(task);
+            }
+        }
+
+        // Debounce panel refresh; coalesce multiple rapid inventory changes
+        schedulePanelRefresh(400);
+    }
+
+    private static boolean isPlayerInventoryContainer(int containerId)
+    {
+        for (int id : PLAYER_INVENTORIES)
+        {
+            if (id == containerId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int countHeld(final int itemId)
+    {
+        int total = 0;
+        final ItemContainer inv = client.getItemContainer(InventoryID.INVENTORY);
+        if (inv != null)
+        {
+            for (Item i : inv.getItems())
+            {
+                if (i != null && i.getId() == itemId)
+                {
+                    total += Math.max(1, i.getQuantity());
+                }
+            }
+        }
+        final ItemContainer equip = client.getItemContainer(InventoryID.EQUIPMENT);
+        if (equip != null)
+        {
+            for (Item i : equip.getItems())
+            {
+                if (i != null && i.getId() == itemId)
+                {
+                    total += Math.max(1, i.getQuantity());
+                }
+            }
+        }
+        final ItemContainer bank = client.getItemContainer(InventoryID.BANK);
+        if (bank != null)
+        {
+            for (Item i : bank.getItems())
+            {
+                if (i != null && i.getId() == itemId)
+                {
+                    total += Math.max(1, i.getQuantity());
+                }
+            }
+        }
+        final ItemContainer seedVault = client.getItemContainer(InventoryID.SEED_VAULT);
+        if (seedVault != null)
+        {
+            for (Item i : seedVault.getItems())
+            {
+                if (i != null && i.getId() == itemId)
+                {
+                    total += Math.max(1, i.getQuantity());
+                }
+            }
+        }
+        final ItemContainer groupStorage = client.getItemContainer(InventoryID.GROUP_STORAGE);
+        if (groupStorage != null)
+        {
+            for (Item i : groupStorage.getItems())
+            {
+                if (i != null && i.getId() == itemId)
+                {
+                    total += Math.max(1, i.getQuantity());
+                }
+            }
+        }
+        return total;
+    }
+
+    private int countHeldEquivalent(final int targetItemId, final String targetItemName)
+    {
+        // Fallback to ID-only counting if we don't have a name
+        if (targetItemName == null || targetItemName.isEmpty() || itemManager == null)
+        {
+            return countHeld(targetItemId);
+        }
+
+        final String baseName = normalizeBarrowsName(targetItemName);
+        int total = 0;
+
+        total += countContainerByName(InventoryID.INVENTORY, baseName);
+        total += countContainerByName(InventoryID.EQUIPMENT, baseName);
+        total += countContainerByName(InventoryID.BANK, baseName);
+        total += countContainerByName(InventoryID.SEED_VAULT, baseName);
+        total += countContainerByName(InventoryID.GROUP_STORAGE, baseName);
+
+        // Include the exact base ID too, in case some pieces don't use numeric suffixes
+        total += countHeld(targetItemId);
+        return total;
+    }
+
+    private int countContainerByName(final InventoryID id, final String baseName)
+    {
+        final ItemContainer c = client.getItemContainer(id);
+        if (c == null)
+        {
+            return 0;
+        }
+        int subtotal = 0;
+        for (Item i : c.getItems())
+        {
+            if (i == null)
+            {
+                continue;
+            }
+            try
+            {
+                final String name = normalizeBarrowsName(itemManager.getItemComposition(i.getId()).getName());
+                if (name.equals(baseName))
+                {
+                    subtotal += Math.max(1, i.getQuantity());
+                }
+            }
+            catch (Exception ignored) { }
+        }
+        return subtotal;
+    }
+
+    /**
+     * Normalize Barrows item names so that degraded variants (e.g., "Torag's platelegs 100/75/50/25/0")
+     * all map to the same base string (e.g., "Torag's platelegs").
+     */
+    private static String normalizeBarrowsName(final String raw)
+    {
+        if (raw == null)
+        {
+            return "";
+        }
+        // Strip trailing space+digits (e.g., " 100") and collapse double spaces
+        String s = raw.replaceAll("\\s[0-9]{1,3}$", "").trim();
+        s = s.replaceAll("\\s+", " ");
+        return s;
+    }
+
     private void refreshQuestTasks()
     {
         if (goalManager == null || client == null) return;
