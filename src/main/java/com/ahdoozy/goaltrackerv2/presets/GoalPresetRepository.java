@@ -179,8 +179,8 @@ public class GoalPresetRepository {
                         QuestTask.builder().quest(Quest.MISTHALIN_MYSTERY).build(),
                         QuestTask.builder().quest(Quest.THE_CORSAIR_CURSE).build(),
                         // Note: Shield of Arrav needs a partner
-                        ManualTask.builder().description("Find a partner for Shield of Arrav (Phoenix/Black Arm) or coordinate in a clan chat").build(),
                         QuestTask.builder().quest(Quest.SHIELD_OF_ARRAV).build(),
+                        ManualTask.builder().description("Find a partner for Shield of Arrav (Phoenix/Black Arm) or coordinate in a clan chat").indentLevel(1).build(),
                         // Capstone F2P quest
                         QuestTask.builder().quest(Quest.DRAGON_SLAYER_I).build()
                 ))

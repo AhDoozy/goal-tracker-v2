@@ -27,15 +27,17 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.AsyncBufferedImage;
-import net.runelite.client.util.ColorUtil;
 
 import javax.inject.Inject;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.stream.IntStream;
 import net.runelite.api.ChatMessageType;
 import net.runelite.client.chat.QueuedMessage;
-import net.runelite.client.chat.ChatMessageBuilder;
+import net.runelite.client.util.ColorUtil;
 
 @Slf4j
 @PluginDescriptor(name = "Goal Tracker V2", description = "Keep track of your goals and complete them automatically")
@@ -118,18 +120,19 @@ public final class GoalTrackerV2Plugin extends Plugin
 
     private boolean warmedIcons = false;
 
+    // Debounced UI refresh timer (coalesces many varbit changes into one repaint)
+    private Timer uiRefreshTimer;
+
     private void notifyTask(Task task)
     {
         if (task == null) { return; }
 
         try {
-            String prefix = ColorUtil.wrapWithColorTag("Goal Tracker", Color.GREEN);
-            String msg = new ChatMessageBuilder()
-                .append(prefix)
-                .append(": Completed task — ")
-                .append(task.toString())
-                .build()
-                .toString();
+            // Use existing config color for chat prefix
+            final Color chosen = config.completionMessageColor();
+            final String prefix = ColorUtil.wrapWithColorTag("Goal Tracker", chosen);
+
+            final String msg = prefix + ": Completed task — " + task;
 
             chatMessageManager.queue(
                 QueuedMessage.builder()
@@ -141,6 +144,26 @@ public final class GoalTrackerV2Plugin extends Plugin
         catch (Exception ex) {
             log.warn("notifyTask failed", ex);
         }
+    }
+
+    /**
+     * Schedule a debounced refresh of the sidebar panel. If a refresh is already
+     * scheduled, it will be replaced with the new delay. This prevents spammy
+     * repainting during rapid varbit changes.
+     */
+    private void schedulePanelRefresh(final int delayMs)
+    {
+        if (goalTrackerPanel == null)
+        {
+            return;
+        }
+        if (uiRefreshTimer != null && uiRefreshTimer.isRunning())
+        {
+            uiRefreshTimer.stop();
+        }
+        uiRefreshTimer = new Timer(delayMs, e -> SwingUtilities.invokeLater(goalTrackerPanel::refresh));
+        uiRefreshTimer.setRepeats(false);
+        uiRefreshTimer.start();
     }
 
     /**
@@ -250,6 +273,44 @@ public final class GoalTrackerV2Plugin extends Plugin
         List<SkillLevelTask> skillLevelTasks = goalManager.getIncompleteTasksByType(TaskType.SKILL_LEVEL);
         for (SkillLevelTask task : skillLevelTasks) {
             if (!taskUpdateService.update(task, event)) continue;
+        }
+    }
+
+    @Subscribe
+    public void onGameStateChanged(GameStateChanged event)
+    {
+        if (event.getGameState() == GameState.LOGGED_IN)
+        {
+            // Re-check quest tasks after login
+            clientThread.invokeLater(() -> refreshQuestTasks());
+
+            // Refresh the panel once, 10s after login, after detection settles
+            schedulePanelRefresh(10_000);
+        }
+    }
+
+    @Subscribe
+    public void onVarbitChanged(VarbitChanged event)
+    {
+        // Quest progress often updates via varbits/varps
+        clientThread.invokeLater(() -> refreshQuestTasks());
+
+        // Debounce UI refresh during rapid quest varbit updates
+        schedulePanelRefresh(750);
+    }
+
+    private void refreshQuestTasks()
+    {
+        if (goalManager == null || client == null) return;
+        List<QuestTask> questTasks = goalManager.getIncompleteTasksByType(TaskType.QUEST);
+        for (QuestTask task : questTasks)
+        {
+            task.refreshStatus(client);
+            uiStatusManager.refresh(task);
+            if (task.getStatus().isCompleted())
+            {
+                notifyTask(task);
+            }
         }
     }
     @Provides

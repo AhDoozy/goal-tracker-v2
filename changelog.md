@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
--### Added
+### Added
 - Quest prerequisites button: Each quest task now has an **Add prereqs** button to insert its prerequisites  
   directly beneath it.
 - Shift+Click removal: Shift+Click a task to remove it and all its indented children at once.
@@ -44,6 +44,10 @@
 - Added Full Void Armor preset (base Void top, robe, gloves, melee/range/mage helms).
 - Added Free-to-Play Quests preset including all 20 F2P quests, ordered from quick to long, with partner note for Shield of Arrav.
 - Added Fast Travel Unlocks preset covering quests that unlock teleport networks, transportation methods, and teleport items (spirit trees, gliders, fairy rings, balloons, Kourend memoirs, Drakan's medallion, etc.).
+- Automatic quest status detection: Quest tasks now auto-refresh on login and varbit changes to mark as completed when requirements are already met.
+- Sidebar panel auto-refresh: Goal and task panels now refresh automatically after quest detection, without requiring navigation.
+- Configurable chat message coloring: Completion messages respect the existing `completionMessageColor` config setting for prefix coloring.
+- Free-to-Play preset update: Shield of Arrav now includes an indented partner-finding subtask under the quest.
 
 ### Changed
 - Pre-req button made more compact (~25% smaller).
@@ -90,8 +94,10 @@
 - “+ Add goal” and “Add from Preset…” buttons now stacked vertically in the Goal Tracker panel header for cleaner layout.
 - Goal card progress text (e.g., “1/10”) reserved fixed width and no longer clips; typography is consistent and does not shrink.
 - Task rows updated with consistent styling and ellipsis/edit behavior, matching Goal cards for a unified UI.
+- Quest detection debounced: UI refresh now scheduled once after detection settles (10s post-login, debounced 750ms on varbits) to prevent lag.
+- Replaced old `status` field serialization key with `@SerializedName(value = "status", alternate = {"previous_result"})` for backward compatibility.
 
--### Fixed
+### Fixed
 - Home panel Undo/Redo buttons removed; these controls now exist only in Goal view.
 - ActionBarButton painting fixed: clears background correctly, text always drawn on top, and hover state no longer causes overlapping artifacts.
 - GoalTrackerPanel `home()` method fixed so returning from Goal view refreshes and displays the goal list instead of a blank panel.
@@ -107,3 +113,5 @@
 - Item icons not appearing until entering a goal; fixed by warming icons at startup/login and after import.
 - Home panel not refreshing after task completion; fixed with GoalsChangedListener refresh hook.
 - Overlapping UI issue around Export button resolved by adjusting panel borders and layout.
+- Chat messages no longer display raw `<col>` tags; completion notifications render cleanly.
+- Sidebar panel no longer requires re-entering a goal to update after quest detection.

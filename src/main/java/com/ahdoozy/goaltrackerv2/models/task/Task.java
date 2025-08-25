@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class Task
 {
     @Builder.Default
-    @SerializedName("previous_result")
+    @SerializedName(value = "status", alternate = {"previous_result"})
     private Status status = Status.NOT_STARTED;
 
     @Builder.Default
