@@ -1,18 +1,16 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.ActionHistory;
-import com.toofifty.goaltracker.models.RemoveTaskAction;
-import com.toofifty.goaltracker.models.enums.TaskType;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.task.ManualTask;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.ui.components.EditableInput;
-import com.toofifty.goaltracker.ui.components.ListPanel;
-import com.toofifty.goaltracker.ui.components.ListTaskPanel;
-import com.toofifty.goaltracker.ui.components.ActionBar;
-import com.toofifty.goaltracker.ui.components.ActionBarButton;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.ActionHistory;
+import com.ahdoozy.goaltrackerv2.models.RemoveTaskAction;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.ui.components.EditableInput;
+import com.ahdoozy.goaltrackerv2.ui.components.ListPanel;
+import com.ahdoozy.goaltrackerv2.ui.components.ListTaskPanel;
+import com.ahdoozy.goaltrackerv2.ui.components.ActionBar;
+import com.ahdoozy.goaltrackerv2.ui.components.ActionBarButton;
 import javax.swing.*;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
@@ -31,7 +29,7 @@ import net.runelite.client.ui.ColorScheme;
  */
 public final class GoalPanel extends JPanel implements Refreshable
 {
-    private final GoalTrackerPlugin plugin;
+    private final GoalTrackerV2Plugin plugin;
     private final Goal goal;
 
     private final EditableInput descriptionInput;
@@ -45,7 +43,7 @@ public final class GoalPanel extends JPanel implements Refreshable
     private ActionBarButton redoButton;
     private ActionBarButton prereqsButton;
 
-    GoalPanel(GoalTrackerPlugin plugin, Goal goal, Runnable closeListener)
+    GoalPanel(GoalTrackerV2Plugin plugin, Goal goal, Runnable closeListener)
     {
         super();
         this.plugin = plugin;

@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;

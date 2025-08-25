@@ -1,4 +1,4 @@
-package com.example.models.enums;
+package com.ahdoozy.goaltrackerv2.models.enums;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;

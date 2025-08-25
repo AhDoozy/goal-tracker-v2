@@ -1,14 +1,14 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.ui.components.TextButton;
-import com.toofifty.goaltracker.ui.inputs.ItemTaskInput;
-import com.toofifty.goaltracker.ui.inputs.ManualTaskInput;
-import com.toofifty.goaltracker.ui.inputs.QuestTaskInput;
-import com.toofifty.goaltracker.ui.inputs.SkillLevelTaskInput;
-import com.toofifty.goaltracker.ui.inputs.SkillXpTaskInput;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.ui.components.TextButton;
+import com.ahdoozy.goaltrackerv2.ui.inputs.ItemTaskInput;
+import com.ahdoozy.goaltrackerv2.ui.inputs.ManualTaskInput;
+import com.ahdoozy.goaltrackerv2.ui.inputs.QuestTaskInput;
+import com.ahdoozy.goaltrackerv2.ui.inputs.SkillLevelTaskInput;
+import com.ahdoozy.goaltrackerv2.ui.inputs.SkillXpTaskInput;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,13 +24,13 @@ import net.runelite.client.ui.ColorScheme;
 public final class NewTaskPanel extends JPanel
 {
     private final TextButton moreOptionsButton;
-    private final GoalTrackerPlugin plugin;
+    private final GoalTrackerV2Plugin plugin;
     private final Goal goal;
 
     private JPanel moreOptionsPanel;
     private Consumer<Task> listener;
 
-    NewTaskPanel(GoalTrackerPlugin plugin, Goal goal)
+    NewTaskPanel(GoalTrackerV2Plugin plugin, Goal goal)
     {
         super();
         this.plugin = plugin;

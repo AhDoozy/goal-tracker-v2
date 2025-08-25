@@ -1,8 +1,10 @@
 package com.ahdoozy.goaltrackerv2.services;
 
-import com.toofifty.goaltracker.ItemCache;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.task.*;
+import com.ahdoozy.goaltrackerv2.ItemCache;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import net.runelite.api.*;
 import net.runelite.api.events.StatChanged;
 import org.junit.jupiter.api.Test;

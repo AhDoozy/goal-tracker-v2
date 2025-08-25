@@ -1,17 +1,17 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
-import com.example.GoalManager;
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.UndoStack;
-import com.toofifty.goaltracker.presets.GoalPresetRepository;
-import com.toofifty.goaltracker.presets.GoalPresetRepository.Preset;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.utils.ReorderableList;
-import com.toofifty.goaltracker.ui.components.ActionBar;
-import com.toofifty.goaltracker.ui.components.ActionBarButton;
-import com.toofifty.goaltracker.ui.components.ListItemPanel;
-import com.toofifty.goaltracker.ui.components.ListPanel;
+import com.ahdoozy.goaltrackerv2.GoalManager;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.UndoStack;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.presets.GoalPresetRepository;
+import com.ahdoozy.goaltrackerv2.presets.GoalPresetRepository.Preset;
+import com.ahdoozy.goaltrackerv2.ui.components.ActionBar;
+import com.ahdoozy.goaltrackerv2.ui.components.ActionBarButton;
+import com.ahdoozy.goaltrackerv2.ui.components.ListItemPanel;
+import com.ahdoozy.goaltrackerv2.ui.components.ListPanel;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
@@ -21,9 +21,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.util.function.Consumer;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Consumer;
 
 /**
  * Main plugin panel for Goal Tracker v2.
@@ -34,7 +34,7 @@ public final class GoalTrackerPanel extends PluginPanel implements Refreshable
 {
     private final JPanel mainPanel = new JPanel(new BorderLayout());
     private final ListPanel<Goal> goalListPanel;
-    private final GoalTrackerPlugin plugin;
+    private final GoalTrackerV2Plugin plugin;
     private final GoalManager goalManager;
     private final UndoStack<Goal> undoStack = new UndoStack<>();
     private ActionBarButton undoButtonRef;
@@ -47,12 +47,12 @@ public final class GoalTrackerPanel extends PluginPanel implements Refreshable
     private Goal pendingNewGoal;
 
     @Inject
-    public GoalTrackerPanel(GoalTrackerPlugin plugin, GoalManager goalManager)
+    public GoalTrackerPanel(GoalTrackerV2Plugin plugin, GoalManager goalManager)
     {
         super(false);
         this.plugin = plugin;
         this.goalManager = goalManager;
-        this.goalManager.addGoalsChangedListener(() -> javax.swing.SwingUtilities.invokeLater(this::refreshHomeListIfVisible));
+        this.goalManager.addGoalsChangedListener(() -> SwingUtilities.invokeLater(this::refreshHomeListIfVisible));
 
         setBackground(ColorScheme.DARK_GRAY_COLOR);
         setLayout(new BorderLayout());
@@ -68,28 +68,28 @@ public final class GoalTrackerPanel extends PluginPanel implements Refreshable
         title.setForeground(Color.WHITE);
         title.setFont(FontManager.getRunescapeBoldFont());
 
-        JLabel author = new JLabel("");
-        author.setForeground(Color.LIGHT_GRAY);
-        author.setFont(title.getFont().deriveFont(title.getFont().getSize2D() - 3f));
+        // Title row (top)
+        JPanel titleRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        titleRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        titleRow.add(title);
 
-        JPanel titleTextPanel = new JPanel(new GridLayout(2, 1));
-        titleTextPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
-        titleTextPanel.add(title);
-        titleTextPanel.add(author);
-        titlePanel.add(titleTextPanel, BorderLayout.WEST);
-
-        JPanel addGoalPanel = new JPanel();
-        addGoalPanel.setLayout(new BoxLayout(addGoalPanel, BoxLayout.Y_AXIS));
-        addGoalPanel.setBackground(ColorScheme.DARK_GRAY_COLOR);
-        JPanel addGoalRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
-        addGoalRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        // Buttons row (bottom)
+        JPanel buttonsRow = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
+        buttonsRow.setBackground(ColorScheme.DARK_GRAY_COLOR);
         ActionBarButton addGoalBtn = new ActionBarButton("+ Add goal", this::addNewGoal);
-        addGoalRow.add(addGoalBtn);
-        addGoalPanel.add(addGoalRow);
-        addGoalPanel.add(Box.createVerticalStrut(4));
         ActionBarButton addFromPresetBtn = new ActionBarButton("Add from Preset…", this::addFromPreset);
-        addGoalPanel.add(addFromPresetBtn);
-        titlePanel.add(addGoalPanel, BorderLayout.EAST);
+        buttonsRow.add(addGoalBtn);
+        buttonsRow.add(addFromPresetBtn);
+
+        // Stack rows vertically
+        JPanel headerTop = new JPanel();
+        headerTop.setLayout(new BoxLayout(headerTop, BoxLayout.Y_AXIS));
+        headerTop.setBackground(ColorScheme.DARK_GRAY_COLOR);
+        headerTop.add(titleRow);
+        headerTop.add(Box.createVerticalStrut(4));
+        headerTop.add(buttonsRow);
+
+        titlePanel.add(headerTop, BorderLayout.CENTER);
 
         // Action bar
         ActionBar actionBar = new ActionBar();
@@ -371,7 +371,7 @@ public final class GoalTrackerPanel extends PluginPanel implements Refreshable
         details.setEditable(false);
         details.setBackground(new JPanel().getBackground());
 
-        java.util.function.Consumer<Preset> update = (opt) -> {
+        Consumer<Preset> update = (opt) -> {
             if (opt == null) { details.setText(""); return; }
             int goals = opt.getGoals().size();
             int tasks = opt.getGoals().stream().mapToInt(g -> g.getTasks().size()).sum();

@@ -1,11 +1,11 @@
-package com.example.presets;
+package com.ahdoozy.goaltrackerv2.presets;
 
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.ItemTask;
-import com.toofifty.goaltracker.models.task.ManualTask;
-import com.toofifty.goaltracker.models.task.QuestTask;
-import com.toofifty.goaltracker.models.task.SkillLevelTask;
-import com.toofifty.goaltracker.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.ItemTask;
+import com.ahdoozy.goaltrackerv2.models.task.ManualTask;
+import com.ahdoozy.goaltrackerv2.models.task.QuestTask;
+import com.ahdoozy.goaltrackerv2.models.task.SkillLevelTask;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import lombok.Getter;
 import net.runelite.api.Quest;
 import net.runelite.api.Skill;
@@ -179,8 +179,8 @@ public class GoalPresetRepository {
                         QuestTask.builder().quest(Quest.MISTHALIN_MYSTERY).build(),
                         QuestTask.builder().quest(Quest.THE_CORSAIR_CURSE).build(),
                         // Note: Shield of Arrav needs a partner
-                        ManualTask.builder().description("Find a partner for Shield of Arrav (Phoenix/Black Arm) or coordinate in a clan chat").build(),
                         QuestTask.builder().quest(Quest.SHIELD_OF_ARRAV).build(),
+                        ManualTask.builder().description("Find a partner for Shield of Arrav (Phoenix/Black Arm) or coordinate in a clan chat").indentLevel(1).build(),
                         // Capstone F2P quest
                         QuestTask.builder().quest(Quest.DRAGON_SLAYER_I).build()
                 ))

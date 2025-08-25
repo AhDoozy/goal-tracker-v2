@@ -1,4 +1,4 @@
-package com.example;
+package com.ahdoozy.goaltrackerv2;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,7 +25,7 @@ public final class ItemCache
     private Map<Integer, Integer> itemNoteMap;
 
     @Inject
-    private GoalTrackerConfig config;
+    private GoalTrackerV2Config config;
 
     @Inject
     private Gson gson;

@@ -1,4 +1,4 @@
-package com.example.models;
+package com.ahdoozy.goaltrackerv2.models;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

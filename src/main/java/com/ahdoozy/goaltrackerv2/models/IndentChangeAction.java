@@ -1,7 +1,7 @@
-package com.example.models;
+package com.ahdoozy.goaltrackerv2.models;
 
 import java.util.List;
-import com.toofifty.goaltracker.models.task.Task;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
 
 /**
  * Action for indenting or outdenting a task in a list.

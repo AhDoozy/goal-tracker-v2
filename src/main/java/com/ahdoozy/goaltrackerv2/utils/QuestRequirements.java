@@ -1,8 +1,8 @@
-package com.example.utils;
+package com.ahdoozy.goaltrackerv2.utils;
 
-import com.toofifty.goaltracker.models.task.QuestTask;
-import com.toofifty.goaltracker.models.task.SkillLevelTask;
-import com.toofifty.goaltracker.models.task.Task;
+import com.ahdoozy.goaltrackerv2.models.task.QuestTask;
+import com.ahdoozy.goaltrackerv2.models.task.SkillLevelTask;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
 import net.runelite.api.Quest;
 import net.runelite.api.Skill;
 import java.util.ArrayList;

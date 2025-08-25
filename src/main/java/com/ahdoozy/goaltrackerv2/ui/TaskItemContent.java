@@ -1,35 +1,32 @@
-package com.example.ui;
+package com.ahdoozy.goaltrackerv2.ui;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.services.TaskIconService;
-import com.toofifty.goaltracker.models.task.QuestTask;
-import com.toofifty.goaltracker.utils.QuestRequirements;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.services.TaskIconService;
 
 import java.util.Locale;
 
-import com.toofifty.goaltracker.ui.components.ListPanel;
-import com.toofifty.goaltracker.ui.components.ListItemPanel;
+import com.ahdoozy.goaltrackerv2.ui.components.ListItemPanel;
 import javax.swing.SwingUtilities;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import static com.toofifty.goaltracker.utils.Constants.STATUS_TO_COLOR;
+import static com.ahdoozy.goaltrackerv2.utils.Constants.STATUS_TO_COLOR;
 
-import com.toofifty.goaltracker.models.ActionHistory;
-import com.toofifty.goaltracker.models.ToggleCompleteAction;
+import com.ahdoozy.goaltrackerv2.models.ActionHistory;
+import com.ahdoozy.goaltrackerv2.models.ToggleCompleteAction;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import com.toofifty.goaltracker.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.CardLayout;
 
-import com.toofifty.goaltracker.models.task.ManualTask;
+import com.ahdoozy.goaltrackerv2.models.task.ManualTask;
 
 /**
  * UI component for rendering a single Task row inside a Goal.
@@ -48,10 +45,10 @@ public final class TaskItemContent extends JPanel implements Refreshable
     private JPanel iconWrapper;
     private boolean titleEditable;
 
-    private final GoalTrackerPlugin plugin;
+    private final GoalTrackerV2Plugin plugin;
     private ActionHistory actionHistory;
 
-    TaskItemContent(GoalTrackerPlugin plugin, Goal goal, Task task)
+    TaskItemContent(GoalTrackerV2Plugin plugin, Goal goal, Task task)
     {
         super(new BorderLayout());
         this.plugin = plugin;
@@ -98,7 +95,7 @@ public final class TaskItemContent extends JPanel implements Refreshable
         {
             private void showMenuIfNeeded(MouseEvent e)
             {
-                if (!(e.isPopupTrigger() || javax.swing.SwingUtilities.isRightMouseButton(e)))
+                if (!(e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)))
                 {
                     return;
                 }

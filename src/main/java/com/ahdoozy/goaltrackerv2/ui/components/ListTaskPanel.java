@@ -1,11 +1,12 @@
-package com.example.ui.components;
+package com.ahdoozy.goaltrackerv2.ui.components;
 
-import com.example.ui.TaskItemContent;
-import com.toofifty.goaltracker.utils.QuestRequirements;
+import com.ahdoozy.goaltrackerv2.models.task.QuestTask;
+import com.ahdoozy.goaltrackerv2.ui.TaskItemContent;
+import com.ahdoozy.goaltrackerv2.utils.QuestRequirements;
 
-import com.toofifty.goaltracker.utils.ReorderableList;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
 import java.util.function.Consumer;
 import javax.swing.JMenuItem;
 import java.awt.event.MouseAdapter;
@@ -13,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import javax.swing.SwingUtilities;
 import java.awt.Container;
-import com.toofifty.goaltracker.models.ActionHistory;
-import com.toofifty.goaltracker.models.ReorderTaskAction;
+import com.ahdoozy.goaltrackerv2.models.ActionHistory;
+import com.ahdoozy.goaltrackerv2.models.ReorderTaskAction;
 
 /**
  * Task row panel with context menu (move, indent, toggle),
@@ -62,7 +63,7 @@ public final class ListTaskPanel extends ListItemPanel<Task>
             int baseIndent = item.getIndentLevel();
 
             // Collect affected tasks (item + descendants until sibling/parent)
-            java.util.List<com.toofifty.goaltracker.models.task.Task> affected = new java.util.ArrayList<>();
+            java.util.List<Task> affected = new java.util.ArrayList<>();
             java.util.List<Integer> oldIndents = new java.util.ArrayList<>();
 
             affected.add(item);
@@ -106,7 +107,7 @@ public final class ListTaskPanel extends ListItemPanel<Task>
             int baseIndent = item.getIndentLevel();
 
             // Collect affected tasks (item + descendants until sibling/parent)
-            java.util.List<com.toofifty.goaltracker.models.task.Task> affected = new java.util.ArrayList<>();
+            java.util.List<Task> affected = new java.util.ArrayList<>();
             java.util.List<Integer> oldIndents = new java.util.ArrayList<>();
 
             affected.add(item);
@@ -283,8 +284,8 @@ public final class ListTaskPanel extends ListItemPanel<Task>
         popupMenu.add(toggleStatusItem);
 
         // Add quest pre-reqs menu item only if the quest actually has prereqs
-        if (item instanceof com.toofifty.goaltracker.models.task.QuestTask) {
-            com.toofifty.goaltracker.models.task.QuestTask questTask = (com.toofifty.goaltracker.models.task.QuestTask) item;
+        if (item instanceof QuestTask) {
+            QuestTask questTask = (QuestTask) item;
             int baseIndent = item.getIndentLevel();
             // Gather existing direct/descendant children under this quest to avoid duplicates
             java.util.Set<String> existingKeys = new java.util.HashSet<>();
@@ -297,9 +298,9 @@ public final class ListTaskPanel extends ListItemPanel<Task>
                 existingKeys.add(child.getClass().getName() + "|" + child.toString());
             }
             var rawPrereqs = QuestRequirements.getRequirements(questTask.getQuest(), baseIndent + 1);
-            java.util.List<com.toofifty.goaltracker.models.task.Task> missingPrereqs = new java.util.ArrayList<>();
+            java.util.List<Task> missingPrereqs = new java.util.ArrayList<>();
             if (rawPrereqs != null) {
-                for (com.toofifty.goaltracker.models.task.Task p : rawPrereqs) {
+                for (Task p : rawPrereqs) {
                     String key = p.getClass().getName() + "|" + p.toString();
                     if (!existingKeys.contains(key)) {
                         missingPrereqs.add(p);
@@ -320,8 +321,8 @@ public final class ListTaskPanel extends ListItemPanel<Task>
                             if (child.getIndentLevel() <= baseIndent) break;
                             currentKeys.add(child.getClass().getName() + "|" + child.toString());
                         }
-                        java.util.List<com.toofifty.goaltracker.models.task.Task> filtered = new java.util.ArrayList<>();
-                        for (com.toofifty.goaltracker.models.task.Task t : raw) {
+                        java.util.List<Task> filtered = new java.util.ArrayList<>();
+                        for (Task t : raw) {
                             String key = t.getClass().getName() + "|" + t.toString();
                             if (!currentKeys.contains(key)) {
                                 filtered.add(t);
@@ -329,7 +330,7 @@ public final class ListTaskPanel extends ListItemPanel<Task>
                         }
                         if (!filtered.isEmpty()) {
                             int index = list.indexOf(item);
-                            for (com.toofifty.goaltracker.models.task.Task prereq : filtered) {
+                            for (Task prereq : filtered) {
                                 list.add(index + 1, prereq);
                                 index++;
                             }
@@ -489,8 +490,8 @@ public final class ListTaskPanel extends ListItemPanel<Task>
         popupMenu.add(toggleStatusItem);
 
         // Quest pre-reqs (if available)
-        if (item instanceof com.toofifty.goaltracker.models.task.QuestTask) {
-            com.toofifty.goaltracker.models.task.QuestTask questTask = (com.toofifty.goaltracker.models.task.QuestTask) item;
+        if (item instanceof QuestTask) {
+            QuestTask questTask = (QuestTask) item;
             int baseIndent = item.getIndentLevel();
             java.util.Set<String> existingKeys = new java.util.HashSet<>();
             int parentIndex = list.indexOf(item);
@@ -500,9 +501,9 @@ public final class ListTaskPanel extends ListItemPanel<Task>
                 existingKeys.add(child.getClass().getName() + "|" + child.toString());
             }
             var rawPrereqs = QuestRequirements.getRequirements(questTask.getQuest(), baseIndent + 1);
-            java.util.List<com.toofifty.goaltracker.models.task.Task> missingPrereqs = new java.util.ArrayList<>();
+            java.util.List<Task> missingPrereqs = new java.util.ArrayList<>();
             if (rawPrereqs != null) {
-                for (com.toofifty.goaltracker.models.task.Task p : rawPrereqs) {
+                for (Task p : rawPrereqs) {
                     String key = p.getClass().getName() + "|" + p.toString();
                     if (!existingKeys.contains(key)) missingPrereqs.add(p);
                 }
@@ -519,14 +520,14 @@ public final class ListTaskPanel extends ListItemPanel<Task>
                             if (child.getIndentLevel() <= baseIndent) break;
                             currentKeys.add(child.getClass().getName() + "|" + child.toString());
                         }
-                        java.util.List<com.toofifty.goaltracker.models.task.Task> filtered = new java.util.ArrayList<>();
-                        for (com.toofifty.goaltracker.models.task.Task t : raw) {
+                        java.util.List<Task> filtered = new java.util.ArrayList<>();
+                        for (Task t : raw) {
                             String key = t.getClass().getName() + "|" + t.toString();
                             if (!currentKeys.contains(key)) filtered.add(t);
                         }
                         if (!filtered.isEmpty()) {
                             int insertIndex = list.indexOf(item);
-                            for (com.toofifty.goaltracker.models.task.Task prereq : filtered) {
+                            for (Task prereq : filtered) {
                                 list.add(insertIndex + 1, prereq);
                                 insertIndex++;
                             }
@@ -575,10 +576,10 @@ public final class ListTaskPanel extends ListItemPanel<Task>
      */
     public static void addPrereqsForTask(ReorderableList<Task> list, Task item)
     {
-        if (!(item instanceof com.toofifty.goaltracker.models.task.QuestTask)) {
+        if (!(item instanceof QuestTask)) {
             return;
         }
-        com.toofifty.goaltracker.models.task.QuestTask questTask = (com.toofifty.goaltracker.models.task.QuestTask) item;
+        QuestTask questTask = (QuestTask) item;
         int baseIndent = item.getIndentLevel();
 
         // Gather existing children under this task to avoid duplicates
@@ -590,14 +591,14 @@ public final class ListTaskPanel extends ListItemPanel<Task>
             existingKeys.add(child.getClass().getName() + "|" + child.toString());
         }
 
-        java.util.List<com.toofifty.goaltracker.models.task.Task> raw = QuestRequirements.getRequirements(questTask.getQuest(), baseIndent + 1);
+        java.util.List<Task> raw = QuestRequirements.getRequirements(questTask.getQuest(), baseIndent + 1);
         if (raw == null || raw.isEmpty()) {
             return;
         }
 
         // Filter out any already-present entries
-        java.util.List<com.toofifty.goaltracker.models.task.Task> filtered = new java.util.ArrayList<>();
-        for (com.toofifty.goaltracker.models.task.Task t : raw) {
+        java.util.List<Task> filtered = new java.util.ArrayList<>();
+        for (Task t : raw) {
             String key = t.getClass().getName() + "|" + t.toString();
             if (!existingKeys.contains(key)) {
                 filtered.add(t);
@@ -610,7 +611,7 @@ public final class ListTaskPanel extends ListItemPanel<Task>
 
         // Insert directly after the parent item, preserving order from QuestRequirements
         int insertIndex = list.indexOf(item);
-        for (com.toofifty.goaltracker.models.task.Task prereq : filtered) {
+        for (Task prereq : filtered) {
             list.add(insertIndex + 1, prereq);
             insertIndex++;
         }

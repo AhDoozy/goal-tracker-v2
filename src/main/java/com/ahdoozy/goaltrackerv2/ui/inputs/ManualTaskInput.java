@@ -1,8 +1,8 @@
-package com.example.ui.inputs;
+package com.ahdoozy.goaltrackerv2.ui.inputs;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.ManualTask;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.ManualTask;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.components.FlatTextField;
 
@@ -18,7 +18,7 @@ public final class ManualTaskInput extends TaskInput
 {
     private final FlatTextField titleField;
 
-    public ManualTaskInput(GoalTrackerPlugin plugin, Goal goal)
+    public ManualTaskInput(GoalTrackerV2Plugin plugin, Goal goal)
     {
         super(plugin, goal, "Quick add");
 

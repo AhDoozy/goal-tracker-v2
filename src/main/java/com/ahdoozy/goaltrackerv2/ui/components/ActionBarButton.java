@@ -1,4 +1,4 @@
-package com.example.ui.components;
+package com.ahdoozy.goaltrackerv2.ui.components;
 
 import java.awt.Cursor;
 import java.awt.Graphics;

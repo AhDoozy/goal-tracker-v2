@@ -1,6 +1,6 @@
-package com.example.models.task;
+package com.ahdoozy.goaltrackerv2.models.task;
 
-import com.example.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -22,6 +22,12 @@ public final class SkillLevelTask extends Task
     public String toString()
     {
         return String.format("%s %s", level, skill.getName());
+    }
+
+    @Override
+    public String getDisplayName()
+    {
+        return String.format("Reach level %d %s", level, skill.getName());
     }
 
     @Override

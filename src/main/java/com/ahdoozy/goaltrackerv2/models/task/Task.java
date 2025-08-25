@@ -1,8 +1,8 @@
-package com.example.models.task;
+package com.ahdoozy.goaltrackerv2.models.task;
 
 import com.google.gson.annotations.SerializedName;
-import com.example.models.enums.Status;
-import com.example.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class Task
 {
     @Builder.Default
-    @SerializedName("previous_result")
+    @SerializedName(value = "status", alternate = {"previous_result"})
     private Status status = Status.NOT_STARTED;
 
     @Builder.Default
@@ -60,6 +60,11 @@ public abstract class Task
     public boolean isNotFullyIndented() {
         return !isFullyIndented();
     }
+
+    /**
+     * Returns a human-readable name for the task.
+     */
+    public abstract String getDisplayName();
 
     @Override
     abstract public String toString();

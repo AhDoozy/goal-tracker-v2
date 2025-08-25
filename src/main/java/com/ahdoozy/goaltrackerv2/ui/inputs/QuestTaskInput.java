@@ -1,11 +1,9 @@
-package com.example.ui.inputs;
+package com.ahdoozy.goaltrackerv2.ui.inputs;
 
-import com.example.GoalTrackerPlugin;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.QuestTask;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.utils.QuestRequirements;
-import com.example.ui.components.ComboBox;
+import com.ahdoozy.goaltrackerv2.GoalTrackerV2Plugin;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.QuestTask;
+import com.ahdoozy.goaltrackerv2.ui.components.ComboBox;
 import net.runelite.api.Quest;
 
 import javax.swing.*;
@@ -26,7 +24,7 @@ public final class QuestTaskInput extends TaskInput
     private Quest bestMatch;
     private final ComboBox<Quest> questDropdown;
 
-    public QuestTaskInput(GoalTrackerPlugin plugin, Goal goal)
+    public QuestTaskInput(GoalTrackerV2Plugin plugin, Goal goal)
     {
         super(plugin, goal, "Quest");
 
@@ -53,7 +51,7 @@ public final class QuestTaskInput extends TaskInput
             }
         });
 
-        questDropdown.getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+        questDropdown.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
             .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "submitQuest");
         questDropdown.getActionMap().put("submitQuest", new AbstractAction() {
             @Override

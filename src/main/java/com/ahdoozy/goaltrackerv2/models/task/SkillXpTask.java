@@ -1,6 +1,6 @@
-package com.example.models.task;
+package com.ahdoozy.goaltrackerv2.models.task;
 
-import com.example.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -20,6 +20,12 @@ public final class SkillXpTask extends Task
 
     @Override
     public String toString()
+    {
+        return String.format("%d %s XP", xp, skill.getName());
+    }
+
+    @Override
+    public String getDisplayName()
     {
         return String.format("%d %s XP", xp, skill.getName());
     }

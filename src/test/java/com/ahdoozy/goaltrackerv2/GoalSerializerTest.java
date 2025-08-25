@@ -1,11 +1,13 @@
 package com.ahdoozy.goaltrackerv2;
 
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.models.task.*;
 import com.google.common.io.Resources;
-import com.toofifty.goaltracker.models.enums.Status;
-import com.toofifty.goaltracker.models.enums.TaskType;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.*;
-import com.toofifty.goaltracker.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.enums.TaskType;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.*;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import net.runelite.api.Quest;
 import net.runelite.api.Skill;
 import org.junit.jupiter.api.Test;

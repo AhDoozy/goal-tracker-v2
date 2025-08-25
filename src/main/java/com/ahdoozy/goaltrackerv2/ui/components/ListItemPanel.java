@@ -1,8 +1,8 @@
-package com.example.ui.components;
+package com.ahdoozy.goaltrackerv2.ui.components;
 
-import com.toofifty.goaltracker.utils.ReorderableList;
-import com.example.ui.Refreshable;
-import com.toofifty.goaltracker.models.Goal;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.ui.Refreshable;
+import com.ahdoozy.goaltrackerv2.models.Goal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;

@@ -1,7 +1,7 @@
-package com.example;
+package com.ahdoozy.goaltrackerv2;
 
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.Task;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Singleton;

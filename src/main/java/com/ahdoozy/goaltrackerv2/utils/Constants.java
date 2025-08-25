@@ -1,6 +1,6 @@
-package com.example.utils;
+package com.ahdoozy.goaltrackerv2.utils;
 
-import com.toofifty.goaltracker.models.enums.Status;
+import com.ahdoozy.goaltrackerv2.models.enums.Status;
 import net.runelite.client.ui.ColorScheme;
 
 import java.awt.*;

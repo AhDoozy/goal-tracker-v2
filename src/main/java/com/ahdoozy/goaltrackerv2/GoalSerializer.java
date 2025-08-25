@@ -1,13 +1,13 @@
-package com.example;
+package com.ahdoozy.goaltrackerv2;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.toofifty.goaltracker.adapters.QuestAdapter;
-import com.toofifty.goaltracker.adapters.SkillAdapter;
-import com.toofifty.goaltracker.adapters.TaskAdapter;
-import com.toofifty.goaltracker.models.Goal;
-import com.toofifty.goaltracker.models.task.Task;
-import com.toofifty.goaltracker.utils.ReorderableList;
+import com.ahdoozy.goaltrackerv2.adapters.QuestAdapter;
+import com.ahdoozy.goaltrackerv2.adapters.SkillAdapter;
+import com.ahdoozy.goaltrackerv2.adapters.TaskAdapter;
+import com.ahdoozy.goaltrackerv2.models.Goal;
+import com.ahdoozy.goaltrackerv2.models.task.Task;
+import com.ahdoozy.goaltrackerv2.utils.ReorderableList;
 import net.runelite.api.Quest;
 import net.runelite.api.Skill;
 
